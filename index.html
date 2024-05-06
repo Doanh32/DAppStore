@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>DApp Store</title>
     <style>
         .button {
             padding: 10px 20px;
@@ -14,23 +14,14 @@
         }
     </style>
 </head>
-<body>
-    <h1>Welcome to My Website</h1>
-    <button class="button" id="Connect">Connect Metamask</button>
-    <button class="button" id="Sell">Sell Products</button>
-    <button class="button" id="Purchase">Buy Products</button>
 
-    <script>
-        document.getElementById('Connect').addEventListener('click', function() {
-            // alert('Button 1 clicked!');
-        });
-        document.getElementById('Sell').addEventListener('click', function() {
-            // alert('Button 2 clicked!');
-        });
-        document.getElementById('Purchase').addEventListener('click', function() {
-            // alert('Button 3 clicked!');
-        });
-        
-    </script>
+<body>
+    <button id="connectWallet">Connect Wallet</button>
+    <button id="buyProduct">Buy Product</button>
+    <button id="sellProduct">Sell Product</button>
+
+    <script src="web3.min.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>

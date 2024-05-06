@@ -1,8 +1,9 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import './App.css';
 import { Buy } from './components/Buy';
 import { Sell } from './components/Sell';
 import { Welcome } from './components/Welcome';
+import './src/App.css';
+// import { Connect } from './components/Connect';
 
 function App() {
   return (
