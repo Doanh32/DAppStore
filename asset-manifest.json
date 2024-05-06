@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/DAppStore/static/css/main.f855e6bc.css",
+    "main.js": "/DAppStore/static/js/main.0441d483.js",
+    "static/js/453.43b0109f.chunk.js": "/DAppStore/static/js/453.43b0109f.chunk.js",
+    "index.html": "/DAppStore/index.html",
+    "main.f855e6bc.css.map": "/DAppStore/static/css/main.f855e6bc.css.map",
+    "main.0441d483.js.map": "/DAppStore/static/js/main.0441d483.js.map",
+    "453.43b0109f.chunk.js.map": "/DAppStore/static/js/453.43b0109f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.0441d483.js"
+  ]
+}
