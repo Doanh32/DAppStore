@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export function Buy() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const [selectedProducts, setSelectedProducts] = useState([]);
 
     // Load product data from JSON file
     useEffect(() => {
@@ -15,25 +16,39 @@ export function Buy() {
             .catch(error => {
                 console.error('Error loading product data:', error);
             });
-    }, []);
+    }, []); // Empty dependency array to ensure the effect runs only once
+
+    // Handle checkbox change
+    const handleCheckboxChange = (productId) => {
+        const isChecked = selectedProducts.includes(productId);
+        if (isChecked) {
+            setSelectedProducts(selectedProducts.filter(id => id !== productId));
+        } else {
+            setSelectedProducts([...selectedProducts, productId]);
+        }
+    };
 
     // Handle buy action
-    const handleBuy = (productId) => {
-        // Remove the product from the list
-        const updatedProducts = products.filter(product => product.id !== productId);
-        setProducts(updatedProducts);
-
+    const handleBuy = () => {
+        // Perform actions based on selectedProducts
+        console.log('Selected products:', selectedProducts);
+        
     };
 
     return (
         <div>
             <h1>Buy Products</h1>
+            <button onClick={handleBuy}>Buy Selected</button>
             {products.map(product => (
                 <div key={product.id}>
                     <h2>{product.title}</h2>
                     <p>{product.description}</p>
                     <p>Price: {product.price}</p>
-                    <button onClick={() => handleBuy(product.id)}>Buy ◉Θ◉</button>
+                    <input
+                        type="checkbox"
+                        checked={selectedProducts.includes(product.id)}
+                        onChange={() => handleCheckboxChange(product.id)}
+                    />
                 </div>
             ))}
         </div>

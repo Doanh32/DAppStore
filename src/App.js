@@ -1,16 +1,16 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { Buy } from './components/Buy';
-import { Sell } from './components/Sell';
-import { Welcome } from './components/Welcome';
+import { Buy } from './components/Buy.js';
+import { Sell } from './components/Sell.js';
+import { Welcome } from './components/Welcome.js';
 
 function App() {
   return (
-    <Router>
+    <Router basename = "/DAppStore">
       <Routes>
         <Route path = "/" element={<Welcome />} />
-        <Route path = "/buyitems" element={<Buy />} />
-        <Route path = "/sellitems" element={<Sell />} />
+        <Route path = "/buyproduct" element={<Buy />} />
+        <Route path = "/sellproduct" element={<Sell />} />
         {/* <Route path = "/connectwallet" element={<Connect />} /> */}
       </Routes>
     </Router>

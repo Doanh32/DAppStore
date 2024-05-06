@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './style.css';
-
 import styled from 'styled-components';
+import Web3 from 'web3';
 
-export const OxygenButtons = styled.button`
+const OxygenButtons = styled.button`
     @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
     background-color: #967bb6;
     font-family: "Oxygen", sans-serif;
@@ -14,43 +13,227 @@ export const OxygenButtons = styled.button`
     margin: 0px 50px;
     padding: 20px 20px;
     color: white;
+    border: none;
+    cursor: pointer;
 
-`
+    &:hover {
+        background-color: #7f5d9e;
+    }
+`;
 
 export function Welcome() {
-
     const navigate = useNavigate();
 
-    function navBuy() {
-        navigate('/buyitems');
+    async function handleConnectWallet() {
+        try {
+            // Check if MetaMask is installed
+            if (window.ethereum) {
+                // Request account access
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                console.log("Wallet connected:", window.ethereum.selectedAddress);
+            } else {
+                // MetaMask is not installed
+                console.error("MetaMask is not installed.");
+            }
+        } catch (error) {
+            // Error connecting to wallet
+            console.error("Error connecting to MetaMask wallet:", error);
+        }
     }
 
-    function navSell() {
-        navigate('/sellitems')
+    async function handleBuyProduct() {
+        try {
+            const web3 = new Web3(window.ethereum);
+            const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8"; 
+            const contract = new web3.eth.Contract(abi, contractAddress);
+            const productId = 1;
+            await contract.methods.purchaseProduct(productId)
+                .send({ from: window.ethereum.selectedAddress, value: web3.utils.toWei('0.0001', 'ether') });
+            console.log("Product purchased successfully.");
+        } catch (error) {
+            console.error("Error purchasing product:", error);
+        }
     }
 
-    function navConnect() {
-        navigate('/connectwallet')
+    async function handleSellProduct() {
+        try {
+            const web3 = new Web3(window.ethereum);
+            const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8"; 
+            const contract = new web3.eth.Contract(abi, contractAddress);
+            const title = "My Product";
+            const description = "Product Description";
+            const priceInSepoliaEth = 1;
+            await contract.methods.createProduct(title, description, priceInSepoliaEth)
+                .send({ from: window.ethereum.selectedAddress, value: web3.utils.toWei('0.001', 'ether') });
+            console.log("Product listed successfully.");
+        } catch (error) {
+            console.error("Error listing product:", error);
+        }
+    }
+
+    function navBuyItems() {
+        navigate('/buyproduct');
+    }
+
+    function navSellItems() {
+        navigate('/sellproduct');
     }
 
     return (
-        <div class="welcomePage" style={{ backgroundImage: "url(/../sunset.jpg)" }}>
-            <div class = "container-test">
-                <h1> Welcome to DApp Marketplace</h1>
+        <div className="welcomePage" style={{ backgroundImage: "url(/../sunset.jpg)" }}>
+            <div className="container-test">
+                <h1> Welcome to DApp Store ✿◡‿◡</h1>
             </div>
-            <div class = "container">
-                <OxygenButtons onClick={navBuy}>
-                    Buy Items
-                </OxygenButtons>
-                <OxygenButtons onClick={navSell}>
-                    Sell Items
-                </OxygenButtons>
-                <OxygenButtons onClick={navConnect}>
-                    Connect Wallet
-                </OxygenButtons>
+            <div className="container">
+                <OxygenButtons onClick={handleConnectWallet}>Connect Wallet</OxygenButtons>
+                <OxygenButtons id="buyproduct" onClick={handleBuyProduct}>Buy Product</OxygenButtons>
+                <OxygenButtons id="sellproduct" onClick={handleSellProduct}>Sell Product</OxygenButtons>
             </div>
         </div>
-
-
     );
 }
+
+const abi = [
+    {
+        "inputs": [],
+        "name": "createProduct",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_title",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_description",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_priceInSepoliaEth",
+                "type": "uint256"
+            }
+        ],
+        "name": "createProduct",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_id",
+                "type": "uint256"
+            }
+        ],
+        "name": "purchaseProduct",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "priceInSepoliaEth",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "purchased",
+                "type": "bool"
+            }
+        ],
+        "name": "ProductCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "price",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "purchased",
+                "type": "bool"
+            }
+        ],
+        "name": "ProductPurchased",
+        "type": "event"
+    }
+];

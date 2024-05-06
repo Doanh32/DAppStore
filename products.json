@@ -8,6 +8,21 @@
       "title": "Chicken",
       "description": "Sometimes, they're fried and on sale on Tuesdays.",
       "priceInWei": "0.00034"
+    },
+    {
+        "title": "Piglet",
+        "description": "Yes, little piglet.",
+        "priceInWei": "0.0001"
+    },
+    {
+        "title": "Why",
+        "description": "A philosophical question.",
+        "priceInWei": "0.001"
+    },
+    {
+        "title": "Help",
+        "description": "Brain.exe has stopped functioning.",
+        "priceInWei": "0.0003"
     }
   ]
   

@@ -1,21 +1,19 @@
+import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { Buy } from './components/Buy';
-import { Sell } from './components/Sell';
-import { Welcome } from './components/Welcome';
-import './src/App.css';
-// import { Connect } from './components/Connect';
+import { Buy } from './Buy';
+import { Sell } from './Sell';
+import { Welcome } from './Welcome';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path = "/" element={<Welcome />} />
-        <Route path = "/buyitems" element={<Buy />} />
-        <Route path = "/sellitems" element={<Sell />} />
-        {/* <Route path = "/connectwallet" element={<Connect />} /> */}
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/buyproduct" element={<Buy />} />
+                <Route path="/sellproduct" element={<Sell />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
