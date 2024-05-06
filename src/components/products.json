@@ -1,25 +1,30 @@
 [
     {
+      "id": "0001",
       "title": "Pain",
       "description": "Hello, this is the last project of the semester, please take away.",
       "priceInWei": "0.0001"
     },
     {
+      "id": "0002",
       "title": "Chicken",
       "description": "Sometimes, they're fried and on sale on Tuesdays.",
       "priceInWei": "0.00034"
     },
     {
+        "id": "0003",
         "title": "Piglet",
         "description": "Yes, little piglet.",
         "priceInWei": "0.0001"
     },
     {
+        "id": "0004",
         "title": "Why",
         "description": "A philosophical question.",
         "priceInWei": "0.001"
     },
     {
+        "id": "0005",
         "title": "Help",
         "description": "Brain.exe has stopped functioning.",
         "priceInWei": "0.0003"

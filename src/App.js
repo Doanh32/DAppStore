@@ -1,8 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { Buy } from './components/Buy.js';
-import { Sell } from './components/Sell.js';
-import { Welcome } from './components/Welcome.js';
+import { Buy } from './components/Buy';
+import { Sell } from './components/Sell';
+import { Welcome } from './components/Welcome';
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 export function Buy() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ export function Buy() {
             .catch(error => {
                 console.error('Error loading product data:', error);
             });
-    }, []); // Empty dependency array to ensure the effect runs only once
+    }, []); 
 
     // Handle checkbox change
     const handleCheckboxChange = (productId) => {
@@ -39,18 +40,20 @@ export function Buy() {
         <div>
             <h1>Buy Products</h1>
             <button onClick={handleBuy}>Buy Selected</button>
-            {products.map(product => (
-                <div key={product.id}>
-                    <h2>{product.title}</h2>
-                    <p>{product.description}</p>
-                    <p>Price: {product.price}</p>
-                    <input
-                        type="checkbox"
-                        checked={selectedProducts.includes(product.id)}
-                        onChange={() => handleCheckboxChange(product.id)}
-                    />
-                </div>
-            ))}
+            <div className="product-cards">
+                {products.map(product => (
+                    <div className="product-card" key={product.id}>
+                        <h2>{product.title}</h2>
+                        <p>{product.description}</p>
+                        <p>Price: {product.priceInWei} Wei</p>
+                        <input
+                            type="checkbox"
+                            checked={selectedProducts.includes(product.id)}
+                            onChange={() => handleCheckboxChange(product.id)}
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

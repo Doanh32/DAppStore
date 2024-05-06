@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { Buy } from './Buy';
-import { Sell } from './Sell';
-import { Welcome } from './Welcome';
+import { Buy } from './components/Buy';
+import { Sell } from './components/Sell';
+import { Welcome } from './components/Welcome';
 
-function App() {
+function app() {
     return (
         <Router>
             <Routes>
@@ -16,4 +16,4 @@ function App() {
     );
 }
 
-export default App;
+export default app;
