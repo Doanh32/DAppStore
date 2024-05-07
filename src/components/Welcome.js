@@ -28,19 +28,19 @@ export function Welcome() {
         try {
             // Check if MetaMask is installed
             if (window.ethereum) {
-                // Request account access
+                // Request access
                 await window.ethereum.request({ method: 'eth_requestAccounts' });
                 console.log("Wallet connected:", window.ethereum.selectedAddress);
             } else {
-                // MetaMask is not installed
+                // no metamask
                 console.error("MetaMask is not installed.");
             }
         } catch (error) {
-            // Error connecting to wallet
+            // Error handling
             console.error("Error connecting to MetaMask wallet:", error);
         }
     }
-
+	// methods below used in other pages
     async function handleBuyProduct() {
         try {
             const web3 = new Web3(window.ethereum);
@@ -70,7 +70,7 @@ export function Welcome() {
             console.error("Error listing product:", error);
         }
     }
-
+// reroute user
     function navBuyItems() {
         navigate('/buyproduct');
     }
